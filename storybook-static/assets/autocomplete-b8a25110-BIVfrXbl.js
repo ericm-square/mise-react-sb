@@ -1,0 +1,1 @@
+var e;(function(a){a.TRUE="true",a.FALSE="false",a.ON="on",a.OFF="off"})(e||(e={}));function t(a){switch(a){case"":case!0:case e.ON:case e.TRUE:return e.ON;case!1:case e.OFF:case e.FALSE:return e.OFF;default:return a}}export{t as a};
