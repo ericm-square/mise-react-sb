@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './CheckboxSingle.module.css';
 
 export interface ICheckboxSingleProps {
@@ -6,7 +5,6 @@ export interface ICheckboxSingleProps {
   hideLabel?: boolean;
   sublabel?: string;
   value?: boolean;
-  parentModel?: string;
   invalid?: boolean;
   disabled?: boolean;
   variant?: string;
@@ -16,6 +14,8 @@ export interface ICheckboxSingleProps {
   indeterminate?: boolean;
   isRequired?: boolean;
   CheckboxSingleClasses?: string;
+
+  onChange?: () => void;
 }
 
 export default function CheckboxSingle(props: ICheckboxSingleProps) {
@@ -24,7 +24,7 @@ export default function CheckboxSingle(props: ICheckboxSingleProps) {
     // hideLabel,
     sublabel,
     value,
-    parentModel,
+    onChange,
     invalid,
     disabled,
     variant,
@@ -36,13 +36,10 @@ export default function CheckboxSingle(props: ICheckboxSingleProps) {
     CheckboxSingleClasses,
   } = props;
 
-  const [model, setModel] = useState(false);
-
   const optionId = `checkbox-single-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
     <div
-      data-x-modelable={parentModel ? 'model' : undefined}
       data-aria-invalid={invalid}
       className={`${styles['form-element']} ${styles['form-checkbox']} ${styles['form-checkbox--single']} ${CheckboxSingleClasses}`}
       data-class={`{'form-checkbox--invalid': ${invalid}}`}
@@ -61,11 +58,15 @@ export default function CheckboxSingle(props: ICheckboxSingleProps) {
             id={optionId}
             type="checkbox"
             className={styles['form-checkbox__input']}
-            checked={model === value}
+            checked={value ? value : undefined}
             disabled={disabled}
             data-indeterminate={indeterminate}
             required={isRequired}
-            onChange={() => setModel(!model)}
+            onChange={() => { 
+              if (onChange) {
+                onChange();
+              }
+            }}
           />
           <span className={styles['form-checkbox__input-labels']}>
             <span className={styles['form-checkbox__input-label']}>

@@ -41,19 +41,11 @@ export default function Menu(props: IMenuProps) {
   }, [hoverIndex]);
 
   const onMenuItemFocus = useCallback((): void => {
-    if (menuTriggerRef.current) {
-      if (hoverIndex === 0) {
-        setHoverIndex(1);
-      }
-    }
-  }, [hoverIndex]);
+    
+  }, []);
 
   const onMenuItemBlur = useCallback((): void => {
-    if (menuTriggerRef.current) {
-      setHoverIndex(0);
-    } else {
-      setHoverIndex(1);
-    }
+    
   }, []);
 
   const onMenuItemClick = useCallback((index: number, value: string): void => {
@@ -99,13 +91,13 @@ export default function Menu(props: IMenuProps) {
       className={`${styles['ui-menu']} ${menuClasses}`}
       data-t-size={size}
     >
-      <div className={`${styles['ui-menu--scrollbar']} custom-scrollbar`}>
+      <div className={`${styles['ui-menu--scrollbar']} ${styles['custom-scrollbar']}`}>
         <ul
           ref={menuRef}
           tabIndex={0}
           aria-label="menu list"
           role="listbox"
-          className={`${styles['ui-menu__list']} 'custom-scrollbar-inner'`}
+          className={`${styles['ui-menu__list']} ${styles['custom-scrollbar-inner']}`}
           onFocus={onMenuItemFocus}
           onBlur={onMenuItemBlur}
           onKeyDown={(e) => {
@@ -163,7 +155,12 @@ function MenuItem(props: IMenuItemProps) {
       aria-posinset={index + 1}
       aria-setsize={itemsLength}
       aria-selected={menuValue === item.value}
-      className={`${styles['ui-menu__item']} ${hoverIndex === index ? styles['ui-menu__item--hover'] : ''} ${hoverIndex === index + 1 ? styles['ui-menu__item--hide-divider'] : ''} ${menuValue === item.value ? styles['ui-menu__item--active'] : ''} ${item.disabled ? styles['ui-menu__item--disabled'] : ''}`}
+      className={`
+        ${styles['ui-menu__item']} 
+        ${hoverIndex === index ? styles['ui-menu__item--hover'] : ''} 
+        ${hoverIndex === index + 1 ? styles['ui-menu__item--hide-divider'] : ''} 
+        ${menuValue && (menuValue as any).value === item.value || menuValue === item.value ? styles['ui-menu__item--active'] : ''} 
+        ${item.disabled ? styles['ui-menu__item--disabled'] : ''}`}
       onMouseEnter={() => setHoverIndex(index)}
       onMouseLeave={() => setHoverIndex(null)}
       onClick={() => {

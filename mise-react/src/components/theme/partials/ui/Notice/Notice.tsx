@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import Icon, { type IconNames } from '../Icon/Icon';
 import styles from './Notice.module.css';
+import IconInput from '../../macros/IconInput/IconInput';
 
 export interface INoticeProps {
   id?: string;
-  bannerStyle: 'inline' | 'banner';
+  bannerStyle?: 'inline' | 'banner';
   linkText?: string;
   linkAction?: () => void;
   secondLinkText?: string;
   secondLinkAction?: () => void;
-  title: string;
+  title?: string;
   message: string;
   variant?: 'info' | 'success' | 'warning' | 'normal' | 'critical';
   linkPosition?: 'top' | 'bottom';
@@ -19,12 +20,12 @@ export interface INoticeProps {
 export default function Notice(props: INoticeProps) {
   const {
     id,
-    bannerStyle = 'banner',
+    bannerStyle = 'inline',
     linkText,
     linkAction,
     secondLinkText,
     secondLinkAction,
-    title,
+    title = '',
     message,
     variant = 'normal',
     linkPosition,
@@ -58,7 +59,7 @@ export default function Notice(props: INoticeProps) {
       data-t-variant={variant}
       data-t-style={bannerStyle}
       >
-      <Icon name={noticeIcon} iconClasses={styles['ui-notice__icon']}></Icon>
+      <IconInput name={noticeIcon} iconClasses={styles['ui-notice__icon']}></IconInput>
 
       <div className={styles['ui-notice__message']}>
         {title && <div className={styles['ui-notice__title']}>{title}</div>}

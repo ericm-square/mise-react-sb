@@ -1,3 +1,5 @@
+import IconInput from '../../macros/IconInput/IconInput';
+import { IconNames } from '../Icon/Icon';
 import styles from './Button.module.css';
 
 export interface IButtonProps {
@@ -9,7 +11,7 @@ export interface IButtonProps {
   style?: 'fill' | 'outline';
   size?: 'compact' | 'small' | 'medium' | 'large';
   align?: 'center' | 'left' | 'right' | 'space-between' | 'flex-end';
-  iconPrefix?: string;
+  iconPrefix?: IconNames;
   iconPrefixAlt?: string;
   iconPrefixClasses?: string;
   iconSuffix?: string;
@@ -42,7 +44,7 @@ export default function Button(props: IButtonProps) {
     size = 'medium',
     align = 'center',
     iconPrefix,
-    // iconPrefixAlt,
+    iconPrefixAlt,
     iconPrefixClasses,
     iconSuffix,
     // iconSuffixAlt,
@@ -68,7 +70,7 @@ export default function Button(props: IButtonProps) {
     <>
       {iconPrefix && (
         <span className={`${styles['ui-button__icon']} ${styles['ui-button__icon--prefix']} ${iconPrefixClasses}`}>
-          {iconPrefix}
+          <IconInput name={iconPrefix} hiddenLabel={iconPrefixAlt || label} iconClasses={`${styles['ui-button__icon']} ${styles['ui-button__icon--prefix']} ${iconPrefixClasses}`} />
         </span>
       )}
       {label && <span className={styles['ui-button__label']}>{label}</span>}
@@ -106,7 +108,7 @@ export default function Button(props: IButtonProps) {
       data-t-align={align}
       data-fullwidth={fullWidth}
       data-opaque={opaque}
-      data-destructive={destructive}
+      data-destructive={destructive ? 'true' : undefined}
       disabled={disabled}
       data-contrast={contrast}
       // data-disablehoverstyles={disableHoverStyles}

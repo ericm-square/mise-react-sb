@@ -5,8 +5,27 @@ import Breadcrumb, { IBreadcrumbProps } from "@/components/theme/partials/ui/Bre
 import Marquee from "@/components/theme/partials/ui/Marquee/Marquee";
 import Loader, { ILoaderProps } from "@/components/theme/partials/ui/Loader/Loader";
 import IconInput from "@/components/theme/partials/macros/IconInput/IconInput";
+import Accordion, { IAccordionItem } from "@/components/theme/partials/ui/Accordion/Accordion";
+import CheckboxSingle from "@/components/theme/partials/form/CheckboxSingle/CheckboxSingle";
+import Button, { IButtonProps } from "@/components/theme/partials/ui/Button/Button";
+import Notice from "@/components/theme/partials/ui/Notice/Notice";
+import Menu, { IMenuProps } from "@/components/theme/partials/ui/Menu/Menu";
 
 export default function PlaygroundPage() {
+
+    // Accordion...
+    const [accordionSize, setAccordionSize] = useState('small');
+    const [accordionDivider, setAccordionDivider] = useState(true);
+    const accordionItems1: IAccordionItem[] = [
+        { label: 'Item 1', content: '<p>Accordion item 1 content</p>' },
+        { label: 'Item 2 (bullet list content)', content: '<ul><li>List 1</li><li>List 2</li></ul>' },
+        { label: 'Item 3 (disabled)', content: '<p>Accordion item 3 content</p>', disabled: true },
+    ];
+    const accordionItems2: IAccordionItem[] = [
+        { label: 'Item 1', icon: 'map', content: '<p>Accordion item 1 content</p>' },
+        { label: 'Item 2', icon: 'phone', content: '<p>Accordion item 2 content</p>' },
+    ];
+    
 
     // Pill...
     const pillTypes: IPillProps['type'][] = ['info', 'warning', 'success', 'critical', 'emphasis'];
@@ -25,8 +44,17 @@ export default function PlaygroundPage() {
         { title: 'Item name' },
     ];
 
-    // Loader
+    // Buttons...
+    const [buttonSize, setButtonSize] = useState<IButtonProps['size']>('medium');
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [buttonDestructive, setButtonDestructive] = useState(false);
+    const [buttonOpaque, setButtonOpaque] = useState(false);
+
+    // Loader...
     const [loaderSize, setLoaderSize] = useState<ILoaderProps['size']>('small');
+
+    // Menu...
+    const [menuSize, setMenuSize] = useState<IMenuProps['size']>('medium');
 
 
     
@@ -328,8 +356,57 @@ export default function PlaygroundPage() {
                 </div>
             </div>
 
+            {/* Accordion */}
+            <h3 id="accordion" className={`${styles["heading-with-margin"]} heading-with-margin`}>Accordion</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
+                <div className={styles.col} data-col-12>
+                    <div className={`${styles.row} ${styles['example__options-switcher']}`}>
+                        <div className={styles.col} data-col-3>
+                        <label>Choose size</label>
+                        <select value={accordionSize} onChange={(e) => setAccordionSize(e.target.value)}>
+                            <option value="small">small</option>
+                            <option value="medium">medium</option>
+                            <option value="large">large</option>
+                        </select>
+                        </div>
+                        <div className={styles.col} data-col-3>
+                            <CheckboxSingle
+                                value={accordionDivider}
+                                label="Show divider"
+                                onChange={() => setAccordionDivider(!accordionDivider)}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.col} data-col-6>
+                <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>
+                    size: {accordionSize}{accordionDivider && ', with divider'}
+                </h4>
+                <Accordion
+                    accordionItems={accordionItems1}
+                    size={accordionSize}
+                    hideDivider={!accordionDivider}
+                    allowedTags={['p', 'ul', 'li']}
+                    richTextFormatting
+                />
+                </div>
+                <div className={styles.col} data-col-6>
+                <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>
+                    with custom icons, size: {accordionSize}{accordionDivider && ', with divider'}
+                </h4>
+                <Accordion
+                    accordionItems={accordionItems2}
+                    size={accordionSize}
+                    hideDivider={!accordionDivider}
+                    expandIcon="add"
+                    collapseIcon="remove"
+                />
+                </div>
+            </div>
+
             {/* Pills */}
-            <h3 id="pills" className={styles["heading-with-margin"]}>Pills</h3>
+            <h3 id="pills" className={`${styles["heading-with-margin"]} heading-with-margin`}>Pills</h3>
             <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
                 <div className={styles.col} data-col-12>
                     <div className={`${styles.row} ${styles['example__options-switcher']}`}>
@@ -361,28 +438,23 @@ export default function PlaygroundPage() {
                         <div className={styles.col} data-col-3>
                             <label>Additional options</label>
                             <div>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        checked={pillUppercase}
-                                        onChange={(e) => setPillUppercase(e.target.checked)}
-                                    />
-                                    Uppercase
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        checked={pillInteractive}
-                                        onChange={(e) => setPillInteractive(e.target.checked)}
-                                    />
-                                    Interactive
-                                </label>
+                                <CheckboxSingle
+                                    value={pillUppercase}
+                                    label="Uppercase"
+                                    onChange={() => setPillUppercase(!pillUppercase)}
+                                />
+
+                                <CheckboxSingle
+                                    value={pillInteractive}
+                                    label="Interactive"
+                                    onChange={() => setPillInteractive(!pillInteractive)}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={styles.col} data-col-6>
-                    <h4 className={styles["heading-with-margin"]}>
+                    <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>
                         variant: {pillVariant}, size: {pillSize}, shape: {pillShape}
                         {pillUppercase && ', uppercase'}
                     </h4>
@@ -402,7 +474,7 @@ export default function PlaygroundPage() {
             </div>
 
             {/* Breadcrumb */}
-            <h3 id="breadcrumb" className={styles["heading-with-margin"]}>Breadcrumb</h3>
+            <h3 id="breadcrumb" className={`${styles["heading-with-margin"]} heading-with-margin`}>Breadcrumb</h3>
             <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
                 <div className={styles.col} data-col-12>
                     <div className={`${styles.row} ${styles['example__options-switcher']}`}>
@@ -415,25 +487,219 @@ export default function PlaygroundPage() {
                             </select>
                         </div>
                         <div className={styles.col} data-col-3>
-                            <label>Uppercase</label>
-                            <input
-                                type="checkbox"
-                                checked={breadcrumbUppercase}
-                                onChange={(e) => setBreadcrumbUppercase(e.target.checked)}
+                            <CheckboxSingle
+                                value={breadcrumbUppercase}
+                                label="Uppercase"
+                                onChange={() => setBreadcrumbUppercase(!pillUppercase)}
                             />
                         </div>
                     </div>
                 </div>
                 <div className={styles.col} data-col-12>
-                    <h4 className={styles["heading-with-margin"]}>
+                    <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>
                         size: {breadcrumbSize}
                     </h4>
                     <Breadcrumb breadcrumb={breadcrumb} size={breadcrumbSize} uppercase={breadcrumbUppercase} />
                 </div>
             </div>
 
+            {/* Buttons */}
+            <h3 id="buttons" className={`${styles["heading-with-margin"]} heading-with-margin`}>Buttons</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
+                <div className={styles.col} data-col-12>
+                    <div className={`${styles.row} ${styles['example__options-switcher']}`}>
+                        <div className={styles.col} data-col-3>
+                            <label>Choose size</label>
+                            <select value={buttonSize} onChange={(e) => setButtonSize(e.target.value as IButtonProps['size'])}>
+                                <option value="compact">compact</option>
+                                <option value="small">small</option>
+                                <option value="medium">medium</option>
+                                <option value="large">large</option>
+                            </select>
+                        </div>
+                        <div className="col" data-col-3>
+                            <label>Additional options</label>
+                            <div>
+                                <CheckboxSingle
+                                    value={buttonDisabled}
+                                    label="Disabled"
+                                    onChange={() => setButtonDisabled(!buttonDisabled)}
+                                />
+
+                                <CheckboxSingle
+                                    value={buttonDestructive}
+                                    label="Destructive"
+                                    onChange={() => setButtonDestructive(!buttonDestructive)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.col} data-col-12>
+                    <h4 className={styles['heading-with-margin']}>Primary fill, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Primary button" style="fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" style="fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" style="fill" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" style="fill" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" style="fill" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" style="fill" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Primary outline, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Primary button" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Secondary fill, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Secondary button" variant="secondary" style="fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="secondary" style="fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="secondary" style="fill" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" variant="secondary" style="fill" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="secondary" style="fill" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" variant="secondary" style="fill" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Secondary outline, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Secondary button" variant="secondary" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="secondary" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="secondary" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" variant="secondary" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="secondary" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" variant="secondary" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>
+                        Neutral
+                        <span
+                            x-data="{ tooltip: document.querySelector('#neutral-fill-tooltip') }"
+                            x-init="Theme.UITooltip.createPopper($el, tooltip, { boundary: '.example__row' });"
+                            style={{ cursor: 'pointer' }}
+                            // onMouseEnter={() => Theme.UITooltip.toggleTooltip(tooltip, true)}
+                            // onMouseLeave={() => Theme.UITooltip.toggleTooltip(tooltip, false)}
+                        >
+                            <IconInput name="info" />
+                        </span>
+                        fill, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}
+                    </h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Neutral button" variant="neutral" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="neutral" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="neutral" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" variant="neutral" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" variant="neutral" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>
+                        Neutral
+                        <span
+                            x-data="{ tooltip: document.querySelector('#neutral-outline-tooltip') }"
+                            x-init="Theme.UITooltip.createPopper($el, tooltip, { boundary: '.example__row' });"
+                            style={{ cursor: 'pointer' }}
+                            // onMouseEnter={() => Theme.UITooltip.toggleTooltip(tooltip, true)}
+                            // onMouseLeave={() => Theme.UITooltip.toggleTooltip(tooltip, false)}
+                        >
+                            <IconInput name="info" />
+                        </span>
+                        outline, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}
+                    </h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Neutral button" variant="neutral" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="neutral" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="neutral" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown toggle disabled" variant="neutral" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Toggle disabled" variant="neutral" style="outline" isDropdown disableDropdownToggle size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>With icons, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Primary fill" iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Primary outline" iconPrefix="widgets" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Secondary outline" variant="secondary" iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Secondary fill" variant="secondary" style="fill" iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Neutral fill" variant="neutral" iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Neutral outline" variant="neutral" style="outline" iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="neutral" style="outline" isDropdown iconPrefix="widgets" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="neutral" style="outline" isDropdown iconSuffix="info" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="neutral" style="outline" isDropdown iconPrefix="widgets" iconSuffix="info" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" style="outline" isDropdown size="large" iconPrefix="widgets" disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" style="outline" isDropdown iconSuffix="info" size="large" disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" style="outline" isDropdown iconPrefix="widgets" iconSuffix="info" size="large" disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Opaque, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles.row}>
+                        <div className={styles.col} data-col-6 style={{ marginBottom: '16px' }}>
+                            <CheckboxSingle
+                                label="Opaque"
+                                sublabel="Makes buttons visible on any background"
+                                value={buttonOpaque}
+                                onChange={() => setButtonOpaque(!buttonOpaque)}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className={styles['example__section-divider']}
+                        style={{ backgroundImage: 'url(/images/placeholder.jpeg)', backgroundSize: 'cover', padding: '16px' }}
+                    >
+                        <Button label="Primary fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Primary outline" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Secondary outline" variant="secondary" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Secondary fill" variant="secondary" style="fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Neutral fill" variant="neutral" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Neutral outline" variant="neutral" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Dropdown button" variant="neutral" style="outline" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="neutral" style="outline" isDropdown size="large" disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Tertiary, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Tertiary button" variant="tertiary" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="tertiary" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="tertiary" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="tertiary" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Subtle, size: {buttonSize} {buttonDisabled && <span>, disabled</span>} {buttonDestructive && <span>, destructive</span>}</h4>
+                    <div className={styles['example__section-divider']}>
+                        <Button label="Subtle button" variant="subtle" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button iconPrefix="close" variant="subtle" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" variant="subtle" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                        <Button label="Dropdown button" sublabel="Sublabel" variant="subtle" isDropdown size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Row</h4>
+                    <div className={styles['example__section-divider']} style={{ flexFlow: 'column', maxWidth: '250px', gap: '0' }}>
+                        <Button label="Row button" iconPrefix="navigate_next" variant="row" />
+                        <Button label="Disabled button" disabled variant="row" />
+                        <Button label="Destructive button" destructive variant="row" />
+                        <Button label="Destructive disabled button" iconPrefix="navigate_next" destructive disabled variant="row" />
+                    </div>
+                    <h4 className={styles['heading-with-margin']}>Text link</h4>
+                    <div className={styles['example__section-divider']}>
+                        <div style={{ padding: '16px' }}>
+                            <Button label="Link" link="#" />
+                        </div>
+                        <div style={{ backgroundColor: 'var(--theme-surface-inverse)', padding: '16px' }}>
+                            <Button label="Link contrast" link="#" contrast />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {/* TODO: Carousel */}
+
+            {/* TODO: Card */}
+
+            {/* TODO: Dialog */}
+
+            {/* TODO: Google Map */}
+
+
             {/* Icons */}
-            <h3 id="icons" className={styles["heading-with-margin"]}>Icons</h3>
+            <h3 id="icons" className={`${styles["heading-with-margin"]} heading-with-margin`}>Icons</h3>
             <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
                 <div className={styles.col} data-col-6>
                     <IconInput name="add" />
@@ -474,7 +740,7 @@ export default function PlaygroundPage() {
             {/* TODO: Image */}
 
             {/* Loader */}
-            <h3 id="loader" className={styles["heading-with-margin"]}>Loader</h3>
+            <h3 id="loader" className={`${styles["heading-with-margin"]} heading-with-margin`}>Loader</h3>
             <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
                 <div className={styles.col} data-col-12>
                     <div className={`${styles.row} ${styles['example__options-switcher']}`}>
@@ -493,13 +759,13 @@ export default function PlaygroundPage() {
                 <div className={styles.col} data-col-12>
                     <div className={`${styles.row}`}>
                         <div className={styles.col} data-col-6>
-                            <h4 className={styles['heading-with-margin']}>
+                            <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>
                                 size: {(loaderSize ?? 'small').replace('-', ' ')}
                             </h4>
                             <Loader size={loaderSize} />
                         </div>
                         <div className={styles.col} data-col-6 style={{ backgroundColor: 'var(--theme-surface-inverse)', padding: '16px', color: 'var(--theme-fill-inverse-solid)' }}>
-                            <h4 className={styles["heading-with-margin"]} style={{ color: 'inherit' }}>
+                            <h4 className={`${styles["heading-with-margin"]} heading-with-margin`} style={{ color: 'inherit' }}>
                                 with contrast, size: {(loaderSize ?? 'small').replace('-', ' ')}
                             </h4>
                             <Loader size={loaderSize} contrast />
@@ -509,12 +775,83 @@ export default function PlaygroundPage() {
             </div>
 
             {/* Marquee */}
-            <h3 id="marquee" className={styles["heading-with-margin"]}>Marquee</h3>
+            <h3 id="marquee" className={`${styles["heading-with-margin"]} heading-with-margin`}>Marquee</h3>
             <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
                 <div className={styles.col} data-col-6>
                     <div style={{ width: "100%", overflow: "hidden" }}>
                         <Marquee content="Marquee test content" />
                     </div>
+                </div>
+            </div>
+
+            {/* Menu */}
+            <h3 id="menu" className={`${styles["heading-with-margin"]} heading-with-margin`}>Menu</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+                <div className={styles.col} data-col-12>
+                    <div className={`${styles.row} ${styles.example__optionsSwitcher}`}>
+                        <div className={styles.col} data-col-3>
+                            <label>
+                                Choose size
+                                <select value={menuSize} onChange={(e) => setMenuSize(e.target.value as IMenuProps['size'])}>
+                                    <option value="small">small</option>
+                                    <option value="medium">medium</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles.headingWithMargin}>
+                        size: <span>{menuSize}</span>
+                    </h4>
+                    <Menu
+                        items={[
+                            { label: 'item 1', value: '1' },
+                            { label: 'item 2', value: '2' },
+                            { label: 'item 3', value: '3', disabled: true },
+                        ]}
+                        size={menuSize}
+                    />
+                </div>
+            </div>
+
+            {/* Notice */}
+            <h3 id="notice" className={`${styles["heading-with-margin"]} heading-with-margin`}>Notice</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
+                <div className={styles.col} data-col-6>
+                    <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>inline style</h4>
+                    <Notice message="Default message goes here" />
+                    <Notice message="Info message goes here" variant="info" />
+                    <Notice message="Success message goes here" variant="success" />
+                    <Notice message="Warning message goes here" variant="warning" />
+                    <Notice message="Critical message goes here" variant="critical" />
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={`${styles["heading-with-margin"]} heading-with-margin`}>banner style</h4>
+                    <Notice title="Default title" message="Default message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Default message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} bannerStyle="banner" linkPosition="bottom" />
+                    <br />
+                    <Notice title="Default title" message="Info message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="info" bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Info message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="info" bannerStyle="banner" linkPosition="bottom" />
+                    <br />
+                    <Notice title="Default title" message="Success message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="success" bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Success message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="success" bannerStyle="banner" linkPosition="bottom" />
+                    <br />
+                    <Notice title="Default title" message="Warning message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="warning" bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Warning message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="warning" bannerStyle="banner" linkPosition="bottom" />
+                    <br />
+                    <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="critical" bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} variant="critical" bannerStyle="banner" linkPosition="bottom" />
+                    {/* Multiple Links */}
+                    <br />
+                    <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} secondLinkText="Second text link" secondLinkAction={() => { window.location.href = '/' }} bannerStyle="banner" />
+                    <br />
+                    <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} secondLinkText="Second text link" secondLinkAction={() => { window.location.href = '/' }} bannerStyle="banner" linkPosition="bottom" />
                 </div>
             </div>
 

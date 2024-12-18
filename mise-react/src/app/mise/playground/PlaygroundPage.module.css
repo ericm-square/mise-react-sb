@@ -262,7 +262,18 @@
     margin-left: calc(var(--max-grid-width) / 12 * 11);
 }
 
+.row > .col[data-col-12] {
+    flex: 0 0 calc(var(--max-grid-width) / 12 * 12);
+    max-width: calc(var(--max-grid-width) / 12 * 12);
+}
 
+.row > .col[data-offset-12] {
+    margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
+}
+
+.row > .col[data-offset-12]:first-child {
+    margin-left: calc(var(--max-grid-width) / 12 * 12);
+}
 
 /*
 {% set breakpoints = { xs: 699, sm: 700, md: 992, lg: 1200, xl: 1600 } %}
@@ -375,6 +386,13 @@
     .row > .col[data-offset-xs-11] {
         margin-left: calc(var(--max-grid-width) / 12 * 11 + var(--gutter-column));
     }
+    .row > .col[data-col-xs-12] {
+        flex: 0 0 calc(var(--max-grid-width) / 12 * 12);
+        max-width: calc(var(--max-grid-width) / 12 * 12);
+    }
+    .row > .col[data-offset-xs-12] {
+        margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
+    }
 }
 
 @media (min-width: 700px) {
@@ -454,6 +472,13 @@
     }
     .row > .col[data-offset-sm-11] {
         margin-left: calc(var(--max-grid-width) / 12 * 11 + var(--gutter-column));
+    }
+    .row > .col[data-col-sm-12] {
+        flex: 0 0 calc(var(--max-grid-width) / 12 * 12);
+        max-width: calc(var(--max-grid-width) / 12 * 12);
+    }
+    .row > .col[data-offset-sm-12] {
+        margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
     }
 }
 
@@ -535,6 +560,13 @@
     .row > .col[data-offset-md-11] {
         margin-left: calc(var(--max-grid-width) / 12 * 11 + var(--gutter-column));
     }
+    .row > .col[data-col-md-12] {
+        flex: 0 0 calc(var(--max-grid-width) / 12 * 12);
+        max-width: calc(var(--max-grid-width) / 12 * 12);
+    }
+    .row > .col[data-offset-md-12] {
+        margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
+    }
 }
 
 @media (min-width: 1200px) {
@@ -614,6 +646,13 @@
     }
     .row > .col[data-offset-lg-11] {
         margin-left: calc(var(--max-grid-width) / 12 * 11 + var(--gutter-column));
+    }
+    .row > .col[data-col-lg-12] {
+        flex: 0 0 calc(var(--max-grid-width) / 12 * 12);
+        max-width: calc(var(--max-grid-width) / 12 * 12);
+    }
+    .row > .col[data-offset-lg-12] {
+        margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
     }
 }
 
@@ -721,6 +760,10 @@
 
     .row > .col[data-offset-xl-11] {
         margin-left: calc(var(--max-grid-width) / 12 * 11 + var(--gutter-column));
+    }
+
+    .row > .col[data-offset-xl-12] {
+        margin-left: calc(var(--max-grid-width) / 12 * 12 + var(--gutter-column));
     }
 
 }

@@ -1,0 +1,81 @@
+/* NOTE: I had to evaluate this myself and copied it here. It comes from theme-variables.html.twig */
+
+:root {
+    --override-font-family-body: 'Inter', sans-serif;
+    --override-font-family-headline: 'Inter', sans-serif;
+    --override-font-family-title: 'Inter', sans-serif;
+    --override-font-family-label: 'Inter', sans-serif;
+
+    --override-color-background: #ffffff;
+
+    --override-text-10: rgba(0,0,0,0.9);
+                --override-text-20: rgba(0,0,0,0.55);
+                --override-text-30: rgba(0,0,0,0.3);
+                --override-text-inverse: rgba(255,255,255,0.95);
+                --override-fill-10: rgba(0,0,0,0.9);
+                --override-fill-20: rgba(0,0,0,0.3);
+                --override-fill-30: rgba(0,0,0,0.15);
+                --override-fill-35: rgba(0,0,0,0.1);
+                --override-fill-40: rgba(0,0,0,0.05);
+                --override-fill-50: rgba(0,0,0,0.03);
+                --override-fill-inverse: rgba(255,255,255,0.95);
+                --override-fill-inverse-solid: #f1f1f1;
+                --override-divider-10: rgba(0,0,0,0.3);
+                --override-divider-10-inverse: rgba(255,255,255,0);
+                --override-divider-20: rgba(0,0,0,0.05);
+                --override-divider-20-inverse: rgba(255,255,255,0.15);
+                --override-surface-05: #ffffff;
+                --override-surface-10: #ffffff;
+                --override-surface-20: #ffffff;
+                --override-surface-30: #ffffff;
+                --override-surface-inverse: #000000;
+                --override-surface-overlay: rgba(0,0,0,0.8);
+                --override-emphasis-10: #122a19;
+                --override-emphasis-20: #1a3b23;
+                --override-emphasis-30: #9bd3ab;
+                --override-emphasis-40: #d0ead7;
+                --override-emphasis-fill: #224d2e;
+                --override-emphasis-fill-contrast: #ffffff;
+                --override-emphasis-text: #1a3b23;
+                --override-success-10: #007f2a;
+                --override-success-20: #009933;
+                --override-success-30: #ccffdd;
+                --override-success-40: #e5ffee;
+                --override-success-fill: #00b23b;
+                --override-success-fill-contrast: #ffffff;
+                --override-success-text: #009933;
+                --override-warning-10: #ff850d;
+                --override-warning-20: #ff9227;
+                --override-warning-30: #ffd2a6;
+                --override-warning-40: #ffe7cf;
+                --override-warning-fill: #ff9f40;
+                --override-warning-fill-contrast: #ffffff;
+                --override-warning-text: #ff9227;
+                --override-critical-10: #99001a;
+                --override-critical-20: #b3001f;
+                --override-critical-30: #ffccd5;
+                --override-critical-40: #ffe6ea;
+                --override-critical-fill: #cc0023;
+                --override-critical-fill-contrast: #ffffff;
+                --override-critical-text: #b3001f;
+
+    --override-color-heading: #000000;
+--override-color-body-text: #000000;
+--override-color-body-text-subtle: rgba(0,0,0,0.55);
+--override-color-label: #000000;
+
+    --override-border-radius-card: 16px;
+--override-border-radius-badge-pill: 100px;
+--override-border-radius-badge-rounded: 6px;
+--override-border-radius-image: 16px;
+--override-border-radius-input-large: 16px;
+--override-border-radius-input-small: 12px;
+--override-border-radius-input-medium: 16px;
+--override-border-radius-button-large: 100px;
+--override-border-radius-button-small: 12px;
+--override-border-radius-button-medium: 16px;
+--override-border-radius-button-mobile: 16px;
+--override-border-radius-button-compact: 12px;
+--override-border-radius-dialog: 32px;
+--override-border-radius-default: 100px;
+}
