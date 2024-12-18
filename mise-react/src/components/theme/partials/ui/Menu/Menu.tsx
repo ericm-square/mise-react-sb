@@ -99,13 +99,13 @@ export default function Menu(props: IMenuProps) {
       className={`${styles['ui-menu']} ${menuClasses}`}
       data-t-size={size}
     >
-      <div className={`${styles['ui-menu--scrollbar']} ${styles['custom-scrollbar']}`}>
+      <div className={`${styles['ui-menu--scrollbar']} custom-scrollbar`}>
         <ul
           ref={menuRef}
           tabIndex={0}
           aria-label="menu list"
           role="listbox"
-          className={`${styles['ui-menu__list']} ${styles['custom-scrollbar-inner']}`}
+          className={`${styles['ui-menu__list']} 'custom-scrollbar-inner'`}
           onFocus={onMenuItemFocus}
           onBlur={onMenuItemBlur}
           onKeyDown={(e) => {

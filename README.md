@@ -15,6 +15,14 @@ https://ericm-square.github.io/mise-react-sb/storybook-static
 ___
 ## Development
 
+### Recommended Setup
+1. Clone this repo and open it in VSCode
+2. Clone mise-theme and open it in VSCode
+   1. https://github.com/squareup/mise-theme
+3. Go here:
+   1. https://oofe-demo.square.site/playground?location_id=L8SXNMC8AN5SW&fulfillment=PICKUP
+4. Run Storybook in this repo `cd mise-react && pnpm run storybook`
+
 ### Work on a Component
 1. Run storybook
    1. `cd mise-react`

@@ -1,12 +1,12 @@
 import styles from './Marquee.module.css';
 
 export interface IMarqueeProps {
-  direction: 'left' | 'right';
+  direction?: 'left' | 'right';
   content: string;
 }
 
 export default function Marquee(props: IMarqueeProps) {
-  const { direction, content } = props;
+  const { direction = 'left', content } = props;
 
   return (
     <div className={styles['ui-marquee-container']}>

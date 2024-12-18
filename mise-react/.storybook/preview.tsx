@@ -4,6 +4,7 @@ import React from 'react';
 import type { Preview } from "@storybook/react";
 import '../src/global.css';
 // import '../src/base.css';  // TODO: Maybe we need this
+import '../src/shared.css';
 import '../src/variables.css';
 
 defineCustomElements(window);

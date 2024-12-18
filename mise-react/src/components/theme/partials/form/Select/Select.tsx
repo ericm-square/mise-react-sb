@@ -4,7 +4,8 @@ import ErrorInput from '../../macros/ErrorInput/ErrorInput';
 import Tooltip from '../../ui/Tooltip/Tooltip';
 import { IMenuItem } from '../../ui/Menu/Menu';
 import Button from '../../ui/Button/Button';
-import { useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import LabelInput from '../../macros/LabelInput/LabelInput';
 
 export interface ISelectOption<T> {
   label: string;
@@ -46,72 +47,19 @@ export default function Select(props: ISelectProps) {
   const labelId = `select-label-${Math.random().toString(36).substr(2, 9)}`;
   const isDisabled = false;
   const isInvalid = false;
-  const isExpanded = true;
   const isLabelLess = false;
   const wrapperRef = useRef(null);
 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   // const [dropdownModel, setDropdownModel] = useState(value);
-  // const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   // const [isLoadingDropdown, setIsLoadingDropdown] = useState(false);
   // const [disabledChoices, setDisabledChoices] = useState<any[]>([]);
 
-  // const toggleDropdown = (show?: boolean) => {
-  //   setIsDropdownVisible(show ?? !isDropdownVisible);
-  //   // Assuming Theme.UITooltip.toggleTooltip is a function to toggle tooltip
-  //   Theme.UITooltip.toggleTooltip(document.querySelector(`#${parentModel}__dropdown`), isDropdownVisible);
-  // };
-
-  // const refreshDropdown = async () => {
-  //   const dropdownEl = document.querySelector(`#${parentModel}__select-tooltip-menu`);
-  //   if (dropdownEl) {
-  //     setIsLoadingDropdown(true);
-
-  //     const updatedOptions = options.map((option) => ({
-  //       ...option,
-  //       disabled: disabledChoices.includes(option.value),
-  //     }));
-
-  //     // Assuming Theme.Template.refreshTemplate is a function to refresh template
-  //     await Theme.Template.refreshTemplate({
-  //       template: 'partials/ui/tooltip-menu',
-  //       props: {
-  //         items: updatedOptions,
-  //         menuTriggerRef: 'selectDropdown',
-  //       },
-  //       el: dropdownEl,
-  //     }).finally(() => {
-  //       setIsLoadingDropdown(false);
-  //     });
-  //   }
-  // };
-
-  // return (
-  //   <div className={`${styles.select} ${selectClasses}`}>
-  //     {label && <label className={styles.label}>{label}</label>}
-  //     {sublabel && <span className={styles.sublabel}>{sublabel}</span>}
-  //     <div className={styles.selectWrapper}>
-  //       {iconPrefix && <span className={styles.iconPrefix}>{iconPrefix}</span>}
-  //       <select
-  //         className={styles.selectInput}
-  //         value={dropdownModel}
-  //         onChange={(e) => setDropdownModel(e.target.value)}
-  //         required={isRequired}
-  //         data-parent-model={parentModel}
-  //         data-size={size}
-  //         data-is-collapsible={isCollapsible}
-  //       >
-  //         {options.map((option) => (
-  //           <option key={option.value} value={option.value} disabled={option.disabled}>
-  //             {option.label}
-  //           </option>
-  //         ))}
-  //       </select>
-  //       {iconSuffix && <span className={styles.iconSuffix}>{iconSuffix}</span>}
-  //     </div>
-  //     {hint && <small className={styles.hint}>{hint}</small>}
-  //     {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
-  //   </div>
-  // );
+  const toggleDropdown = useCallback((show?: boolean) => {
+    setIsDropdownVisible(show ?? !isDropdownVisible);
+    setIsExpanded(show ?? !isExpanded);
+  }, [isDropdownVisible, isExpanded]);
 
   return (
     <div
@@ -128,6 +76,15 @@ export default function Select(props: ISelectProps) {
         
       }}
     >
+
+      {isCollapsible && 
+        <LabelInput
+          id={labelId}
+          label={label ?? ''}
+          hideSublabel={true}
+          isCollapsible={true}
+        />
+      }
 
       {/* TODO: labelInput */}
 
@@ -147,7 +104,7 @@ export default function Select(props: ISelectProps) {
           variant="neutral"
           style="outline"
           size={size || 'defaultSize'}
-          action="toggleDropdown"
+          onClick={() => toggleDropdown()}
           disabled={isDisabled}
         />
 

@@ -1,6 +1,8 @@
 import styles from './Button.module.css';
 
 export interface IButtonProps {
+  onClick?: () => void;
+
   label?: string;
   sublabel?: string;
   variant?: 'primary' | 'secondary' | 'tertiary' | 'subtle' | 'neutral' | 'row';
@@ -32,6 +34,7 @@ export interface IButtonProps {
 
 export default function Button(props: IButtonProps) {
   const {
+    onClick,
     label,
     sublabel,
     variant = 'primary',
@@ -113,6 +116,8 @@ export default function Button(props: IButtonProps) {
       // data-actiononfocus={actionOnFocus}
       // data-skipactionprevent={skipActionPrevent}
       // data-stoppropagation={stopPropagation}
+
+      onClick={onClick}
     >
       {buttonContent}
     </button>

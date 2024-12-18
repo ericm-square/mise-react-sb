@@ -2,6 +2,7 @@ import Notice from '../../ui/Notice/Notice';
 
 export interface IErrorInputProps {
   id?: string;
+  label?: string;
   message?: string;
 }
 
