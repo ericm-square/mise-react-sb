@@ -3,6 +3,9 @@
 This is a React implementation of Mise.
 https://github.com/squareup/mise-theme
 
+Repo:
+https://github.com/ericm-square/mise-react-sb
+
 ___
 ## View
 To view the current progress, go here:
@@ -24,10 +27,10 @@ ___
 If you added some components and want them to appear on the website, do this:
 1. `cd mise-react`
 2. `pnpm run build-storybook`
+   1. It should build to the project root at `/storybook-static`
 3. Make sure there are no errors!
-4. If there are no errors, copy `mise-react/storybook-static` to `./storybook-static` (overwrite the folder basically)
-5. Commit your changes
-6. Wait a few minutes and the changes should be live, here: https://ericm-square.github.io/mise-react-sb/storybook-static
+4. Commit your changes
+5. Wait a few minutes and the changes should be live, here: https://ericm-square.github.io/mise-react-sb/storybook-static
 
 ___
 ## AI Prompts

@@ -20,6 +20,7 @@ export default function Breadcrumb(props: IBreadcrumbProps) {
       data-t-size={size}
       data-uppercase={uppercase}
     >
+      <span>Eric</span><br />
       {breadcrumb.map((crumb, index) => (
         <li key={index} className={styles['ui-breadcrumb__link']}>
           {crumb.link
