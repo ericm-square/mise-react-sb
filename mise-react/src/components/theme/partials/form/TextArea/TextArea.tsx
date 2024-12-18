@@ -89,7 +89,7 @@ export default function TextArea(props: ITextAreaProps) {
       )}
       {errorMessage && (
         <div className={styles['form-element__error']}>
-          <Notice variant="critical" message={errorMessage} title="" bannerStyle="" />
+          <Notice variant="critical" message={errorMessage} title="" bannerStyle="inline" />
         </div>
       )}
     </div>

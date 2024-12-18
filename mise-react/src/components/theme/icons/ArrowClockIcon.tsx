@@ -1,6 +1,4 @@
-export interface IIconProps {
-  iconClasses?: string;
-}
+import { IIconProps } from "../partials/ui/Icon/Icon";
 
 export default function ArrowClockIcon(props: IIconProps) {
   const { iconClasses } = props;

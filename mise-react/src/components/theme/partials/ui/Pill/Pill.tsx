@@ -3,7 +3,7 @@ import styles from './Pill.module.css';
 export interface IPillProps {
   label?: string;
   type?: 'info' | 'success' | 'warning' | 'critical' | 'emphasis';
-  size?: 'small';
+  size?: 'small' | 'normal';
   variant?: 'text' | 'outline' | 'fill';
   shape?: 'squared' | 'rounded';
   uppercase?: boolean;

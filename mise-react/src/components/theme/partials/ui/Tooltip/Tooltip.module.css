@@ -1,0 +1,75 @@
+.ui-tooltip[data-t-variant="normal"],
+.ui-tooltip[data-t-variant="dropdown"] {
+    font: var(--theme-paragraph-20-medium);
+    color: var(--theme-surface-05);
+    letter-spacing: var(--theme-paragraph-20-letter-spacing);
+    white-space: nowrap;
+    background: var(--ui-tooltip-background-override, var(--theme-surface-inverse));
+    border-radius: var(--ui-tooltip-border-radius-override, var(--theme-border-radius-input-small));
+    box-shadow: var(--theme-elevation-20);
+}
+
+.ui-tooltip[data-t-variant="dropdown"] {
+    overflow: hidden;
+    color: var(--theme-surface-inverse);
+    background: var(--ui-tooltip-background-override, var(--theme-surface-05));
+}
+
+.ui-tooltip[data-t-variant="normal"]:not([flush]),
+.ui-tooltip[data-t-variant="dropdown"]:not([flush]) {
+    padding: var(--space-half) var(--space);
+}
+
+.ui-tooltip[data-fullwidth] {
+    width: 100%;
+}
+
+.ui-tooltip[contrast] {
+    color: var(--theme-surface-inverse);
+    background: var(--theme-surface-05);
+}
+
+.ui-tooltip,
+.ui-tooltip[data-t-variant="menu"] {
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-out, visibility 0s linear 0.5s;
+}
+
+.ui-tooltip[data-show],
+.ui-tooltip[data-t-variant="menu"][data-show] {
+    z-index: var(--theme-z-index-overlay);
+    height: auto;
+    overflow: initial;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.ui-tooltip[data-t-variant="dropdown"],
+.ui-tooltip[data-t-variant="menu"]:not([data-borderless]) .ui-menu {
+    box-shadow: var(--theme-elevation-20);
+}
+
+.ui-tooltip[data-t-variant="menu"][data-borderless] .ui-menu {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.ui-tooltip[data-t-variant="menu"][data-borderless] .ui-menu .ui-menu__list {
+    margin: 0;
+}
+
+.ui-tooltip p {
+    font: var(--theme-paragraph-20);
+    letter-spacing: var(--theme-paragraph-20-letter-spacing);
+}
+
+.ui-loader--overlay.ui-tooltip__loader {
+    min-height: 0;
+}

@@ -91,6 +91,10 @@ export type IconNames =
 
 export interface IIconProps {
   name?: IconNames;
+  width?: string;
+  height?: string;
+  color?: string;
+  stroke?: string;
   iconClasses?: string;
 }
 
@@ -236,5 +240,5 @@ export default function Icon(props: IIconProps) {
       break;
   }
 
-  return <IconComponent iconClasses={iconClasses} />;
+  return <IconComponent iconClasses={'material-icon-svg ' + iconClasses} />;
 }

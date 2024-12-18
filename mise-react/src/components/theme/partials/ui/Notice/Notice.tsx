@@ -3,7 +3,8 @@ import Icon, { type IconNames } from '../Icon/Icon';
 import styles from './Notice.module.css';
 
 export interface INoticeProps {
-  bannerStyle: '' | 'banner';
+  id?: string;
+  bannerStyle: 'inline' | 'banner';
   linkText?: string;
   linkAction?: () => void;
   secondLinkText?: string;
@@ -17,6 +18,7 @@ export interface INoticeProps {
 
 export default function Notice(props: INoticeProps) {
   const {
+    id,
     bannerStyle = 'banner',
     linkText,
     linkAction,
@@ -50,6 +52,7 @@ export default function Notice(props: INoticeProps) {
 
   return (
     <div
+      id={id}
       role="alert"
       className={styles['ui-notice']}
       data-t-variant={variant}

@@ -1,0 +1,94 @@
+.ui-menu {
+    width: 100%;
+    min-width: 160px;
+    padding: var(--space-half) var(--space);
+    margin-top: var(--space-half);
+    overflow: hidden;
+    font: var(--theme-paragraph-30-semibold);
+    color: var(--theme-body-text-color);
+    letter-spacing: var(--theme-paragraph-30-letter-spacing);
+    white-space: nowrap;
+    background: var(--theme-body-color);
+    border-radius: var(--theme-border-radius-input-medium);
+}
+
+.ui-menu[data-t-size="small"] {
+    font: var(--theme-paragraph-20-semibold);
+    letter-spacing: var(--theme-paragraph-20-letter-spacing);
+    border-radius: var(--theme-border-radius-input-small);
+}
+
+.ui-menu__list {
+    max-height: 180px;
+    padding: 0 var(--space-x2);
+    margin: var(--space) 0;
+    list-style: none;
+}
+
+.ui-menu__list:focus-visible {
+    outline: none;
+}
+
+.ui-menu__item {
+    position: relative;
+    padding: var(--space-x2) 0;
+    color: var(--theme-link-color);
+    cursor: pointer;
+}
+
+.ui-menu__item:not(:last-child) {
+    border-bottom: 1px solid var(--theme-divider-20);
+}
+
+.ui-menu__item--active {
+    color: var(--theme-emphasis-text);
+}
+
+.ui-menu__item::before {
+    position: absolute;
+    bottom: 0;
+    left: calc(var(--space-x4) / 2 * -1);
+    display: block;
+    width: calc(100% + var(--space-x4));
+    height: 100%;
+    content: '';
+    background-color: var(--theme-emphasis-40);
+    border-radius: var(--theme-border-radius-input-medium-inner);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+.ui-menu__item:active::before {
+    background-color: var(--theme-emphasis-30);
+}
+
+.ui-menu[data-t-size="small"] .ui-menu__item::before {
+    border-radius: var(--theme-border-radius-input-small-inner);
+}
+
+.ui-menu__item--hover,
+.ui-menu__item:hover,
+.ui-menu__item--hide-divider.ui-menu__item {
+    border-color: transparent;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.ui-menu__item--hover::before,
+.ui-menu__item:hover::before,
+.ui-menu__item--active::before,
+.ui-menu__item:active::before {
+    opacity: 1;
+}
+
+.ui-menu__item--disabled {
+    color: var(--theme-text-30);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.ui-menu__item-wrapper {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

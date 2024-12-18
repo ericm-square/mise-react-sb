@@ -42,6 +42,8 @@ Here are a few prompts that you can use if you want
 
 Convert this to React. Use CSS modules. Keep all custom attributes and prefix them with data- if you have to. Keep all CSS class names exactly the same as they are. Make sure you keep the CSS class names exactly the same, even if they don't use standard variable name format!!!
 
+Use the schema for the props in the component.
+
 Use this format for the component:
 ```tsx
 import styles from './Example.module.css';
@@ -70,7 +72,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Example from './Example.js';
 
 const meta: Meta = {
-  title: 'partials/ui/Example',
+  title: 'theme/partials/ui/Example',
   component: Example,
 } satisfies Meta<typeof Example>;
 
@@ -123,7 +125,7 @@ Here is some data on the conversion process
 | partials/ui/Image | | | |
 | partials/ui/Loader | Complete | | |
 | partials/ui/Marquee | Complete | | |
-| partials/ui/Menu | | | |
+| partials/ui/Menu | Complete | | 39:13 (was working on Select and this was a dependency) |
 | partials/ui/Notice | Complete | - Would not convert the whole thing<br> - Made up CSS classes<br> - Mise possibly had a CSS bug (`font` instead of `font-size`)  | 23:02 (Copilot) |
 | partials/ui/Overlay | | | |
 | partials/ui/Pagination | | | |
@@ -135,8 +137,8 @@ Here is some data on the conversion process
 | partials/ui/Row | Complete | | |
 | partials/ui/SegmentedControl | | | |
 | partials/ui/Toast | | | |
-| partials/ui/TooltipMenu | | | |
-| partials/ui/Tooltip | | | |
+| partials/ui/TooltipMenu | Partial | Selected value doesn't work | 38:02 - Part of Tooltip |
+| partials/ui/Tooltip | Partial | Show/Hide doesn't work | 38:02 - was also working on Select, TooltipMenu, Menu (dependencies) |
 | partials/ui/Video | | | |
 | Icons | Partial | Don't adapt to color. Look at `macros.html.twig` - it adds a `material-icon-svg` class to all icons  | 21:39 (Goose) |
 | | | | |
