@@ -1,0 +1,27 @@
+.ui-rating {
+    display: inline-flex;
+    gap: var(--space);
+    align-items: center;
+}
+
+.ui-rating__average {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ui-rating__star {
+    display: block;
+    width: calc((var(--theme-font-size-base) * var(--theme-font-size-scale)) + 8px);
+    color: var(--theme-body-text-color);
+}
+
+.ui-rating__content {
+    margin-top: var(--space-half);
+    font-weight: var(--theme-font-weight-light);
+}
+
+.ui-rating .ui-button[t-element="link"] {
+    font-weight: var(--theme-font-weight-medium);
+    text-decoration: underline;
+}

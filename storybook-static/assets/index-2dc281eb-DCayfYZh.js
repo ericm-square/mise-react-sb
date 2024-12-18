@@ -1,1 +1,0 @@
-function t(e){return new Proxy(o=>o,{apply(o,a,n){return Reflect.apply(o,a,n)}})(e)}function i(e,o){var a,n;return((n=(a=e==null?void 0:e.tagName)===null||a===void 0?void 0:a.toLowerCase)===null||n===void 0?void 0:n.call(a))===t(o)}export{t as g,i};

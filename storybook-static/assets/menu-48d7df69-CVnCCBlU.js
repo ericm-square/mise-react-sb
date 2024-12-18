@@ -1,1 +1,0 @@
-var a;(function(t){t.TODAY="today",t.YESTERDAY="yesterday",t.THIS_WEEK="this-week",t.LAST_WEEK="last-week",t.THIS_MONTH="this-month",t.LAST_MONTH="last-month",t.THIS_YEAR="this-year",t.LAST_YEAR="last-year",t.CUSTOM="custom"})(a||(a={}));export{a as M};

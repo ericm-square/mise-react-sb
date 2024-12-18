@@ -1,0 +1,22 @@
+.ui-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme-fill-40);
+    border-radius: var(--theme-border-radius-image);
+}
+
+.ui-placeholder__icon {
+    --icon-size: 30px;
+    --material-icon-width: var(--icon-size);
+    --material-icon-height: var(--icon-size);
+
+    position: absolute;
+    color: var(--theme-text-10);
+}
+
+.ui-placeholder__loader {
+    position: absolute;
+}

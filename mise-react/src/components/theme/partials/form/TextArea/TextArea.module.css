@@ -1,0 +1,96 @@
+.form-element.form-textarea {
+    position: relative;
+    gap: var(--space-half);
+}
+
+.form-textarea__inner {
+    min-height: 156px;
+    padding: var(--space) var(--space-x2);
+    overflow: auto;
+    color: var(--theme-body-text-color);
+    resize: var(--ui-textarea-resize-override, 'none');
+    background-color: transparent;
+    border: var(--theme-form-border-width) solid var(--theme-fill-30);
+    border-radius: var(--theme-border-radius-input-medium);
+}
+
+.form-textarea--focus .form-textarea__inner {
+    border-color: var(--theme-emphasis-fill);
+    box-shadow: 0px 0px 0px var(--theme-form-border-width) var(--theme-emphasis-fill);
+}
+
+.form-textarea--disabled .form-textarea__inner {
+    cursor: not-allowed;
+    background-color: var(--theme-fill-40);
+    border-color: var(--theme-fill-30);
+}
+
+.form-textarea--invalid:not(:hover, .form-textarea--focus) .form-textarea__inner {
+    border-color: var(--theme-critical-fill);
+}
+
+.form-textarea:not(.form-textarea--disabled):hover .form-textarea__inner {
+    border-color: var(--theme-emphasis-fill);
+}
+
+.form-textarea .form-element__label {
+    position: relative;
+    top: var(--space);
+    font-weight: var(--theme-font-weight-light);
+    transition: font-size 0.2s, font-weight 0.1s ease 0.1s;
+}
+
+.form-textarea--disabled .form-element__label {
+    color: var(--theme-text-30);
+}
+
+.form-textarea--disabled:not(.form-textarea--empty) .form-element__label {
+    color: var(--theme-text-20);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.form-textarea:not(.form-textarea--empty) .form-element__label:not(.form-element__label--collapsible),
+.form-textarea--focus .form-element__label:not(.form-element__label--collapsible) {
+    top: 0;
+    font: var(--theme-paragraph-20-bold);
+    letter-spacing: var(--theme-paragraph-20-letter-spacing);
+}
+
+.form-textarea__input {
+    flex: 1;
+    width: 100%;
+    font: var(--theme-paragraph-30);
+    color: inherit;
+    letter-spacing: var(--theme-paragraph-30-letter-spacing);
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.form-textarea__input:hover,
+.form-textarea__input:focus {
+    border: none;
+    outline: none;
+}
+
+.form-textarea--empty .form-textarea__input {
+    display: none;
+}
+
+.form-textarea--focus .form-textarea__input {
+    display: initial;
+}
+
+.form-textarea__input[disabled] {
+    cursor: not-allowed;
+}
+
+.form-textarea__text-length {
+    font: var(--theme-paragraph-20);
+    color: var(--theme-text-20);
+    letter-spacing: var(--theme-paragraph-20-letter-spacing);
+}
+
+.form-textarea--disabled .form-textarea__text-length {
+    color: var(--theme-text-30);
+}

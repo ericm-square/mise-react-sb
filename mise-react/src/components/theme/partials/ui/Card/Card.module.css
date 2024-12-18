@@ -1,0 +1,58 @@
+.ui-card {
+    box-sizing: border-box;
+    padding: var(--ui-card-padding-override, var(--ui-card-padding));
+    background-color: var(--ui-card-background);
+    border: var(--theme-form-border-width) solid var(--theme-fill-30);
+    border-radius: var(--theme-border-radius-card);
+    box-shadow: none;
+    transition: all 0.2s;
+}
+
+.ui-card[data-t-variant="action"] {
+    --form-card-border-color: transparent;
+
+    position: relative;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    .is-clickable .ui-card:hover,
+    .is-clickable.ui-card:hover {
+        border-color: var(--theme-fill-20);
+        box-shadow: var(--theme-elevation-10);
+    }
+
+    .ui-card[data-t-variant="action"]:hover {
+        border-color: var(--theme-fill-10);
+    }
+}
+
+.ui-card[data-t-variant="action"]:active {
+    --form-card-border-color: var(--theme-emphasis-fill);
+}
+
+.ui-card[data-t-variant="action"][data-selected] {
+    --form-card-border-color: var(--theme-emphasis-fill);
+
+    border-color: var(--form-card-border-color);
+    box-shadow: 0px 0px 0px var(--theme-form-border-width) var(--form-card-border-color);
+}
+
+.ui-card[data-t-variant="action"][data-selected]:active {
+    --form-card-border-color: var(--theme-fill-10);
+}
+
+.ui-card[data-t-variant="action"][data-disabled] {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.ui-card[data-t-variant="action"][data-invalid] {
+    border-color: var(--theme-critical-fill);
+}
+
+.ui-card[data-t-variant="action"][data-selected][data-invalid] {
+    --form-card-border-color: var(--theme-critical-fill);
+}
+
