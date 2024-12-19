@@ -6,7 +6,7 @@ export interface ILoaderProps {
 }
 
 export default function Loader(props: ILoaderProps) {
-  const { size = 'medium', contrast = false } = props;
+  const { size = 'small', contrast = false } = props;
 
   return (
     <div

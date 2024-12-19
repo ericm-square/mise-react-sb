@@ -9,16 +9,8 @@ export interface IPlaceholderProps {
 
 export default function Placeholder(props: IPlaceholderProps) {
   const {
-    icon, isLoading,
+    icon = 'image', isLoading,
   } = props;
-
-  if (isLoading) {
-    return (
-      <div className={styles['ui-placeholder__loader']}>
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <div className={styles['ui-placeholder']}>

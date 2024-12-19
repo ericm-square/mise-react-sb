@@ -7,11 +7,12 @@ export interface IRowProps {
   title?: React.ReactNode;
   text?: React.ReactNode;
   trailing?: React.ReactNode;
+  onClick?: () => void;
 }
 
 export default function Row(props: IRowProps) {
   const {
-    selected, disabled, leading, title, text, trailing,
+    selected, disabled, leading, title, text, trailing, onClick
   } = props;
 
   return (
@@ -19,6 +20,7 @@ export default function Row(props: IRowProps) {
       className={`${styles['ui-row']} ${selected ? styles.selected : ''} ${disabled ? styles.disabled : ''}`}
       data-selected={selected}
       data-disabled={disabled}
+      onClick={onClick}
     >
       {leading && (
         <div className={styles['ui-row__leading']}>

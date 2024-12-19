@@ -12,6 +12,11 @@ import Notice from "@/components/theme/partials/ui/Notice/Notice";
 import Menu, { IMenuProps } from "@/components/theme/partials/ui/Menu/Menu";
 import Card from "@/components/theme/partials/ui/Card/Card";
 import GoogleMap from "@/components/theme/partials/ui/GoogleMap/GoogleMap";
+import Placeholder from "@/components/theme/partials/ui/Placeholder/Placeholder";
+import Price, { IPriceProps } from "@/components/theme/partials/ui/Price/Price";
+import Progress, { IProgressProps } from "@/components/theme/partials/ui/Progress/Progress";
+import Rating from "@/components/theme/partials/ui/Rating/Rating";
+import Row from "@/components/theme/partials/ui/Row/Row";
 
 export default function PlaygroundPage() {
 
@@ -93,6 +98,17 @@ export default function PlaygroundPage() {
 
     // Menu...
     const [menuSize, setMenuSize] = useState<IMenuProps['size']>('medium');
+
+    // Price...
+    const [priceSize, setPriceSize] = useState<IPriceProps['size']>('normal');
+    const [priceVariant, setPriceVariant] = useState<IPriceProps['variant']>('standard');
+    
+    // Progress...
+    const [progressSize, setProgressSize] = useState<IProgressProps['size']>('medium');
+
+    // Row...
+    const [rowDisabled, setRowDisabled] = useState(false);
+    const [rowSelected, setRowSelected] = useState(false);
 
 
     
@@ -941,6 +957,193 @@ export default function PlaygroundPage() {
                     <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} secondLinkText="Second text link" secondLinkAction={() => { window.location.href = '/' }} bannerStyle="banner" />
                     <br />
                     <Notice title="Default title" message="Critical message goes here" linkText="Text link" linkAction={() => { window.location.href = '/' }} secondLinkText="Second text link" secondLinkAction={() => { window.location.href = '/' }} bannerStyle="banner" linkPosition="bottom" />
+                </div>
+            </div>
+
+            {/* TODO: Pagination */}
+
+            {/* Placeholder */}
+            <h3 id="placeholder" className={`${styles["heading-with-margin"]} heading-with-margin`}>Placeholder</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles['example__row']}`}>
+                <div className={styles.col} data-col-6>
+                    <div style={{ display: 'flex', gap: '24px' }}>
+                    <div style={{ width: '100px', height: '100px' }}>
+                        <Placeholder />
+                    </div>
+                    <div style={{ width: '100px', height: '100px' }}>
+                        <Placeholder icon="sell" />
+                    </div>
+                    <div style={{ width: '100px', height: '100px' }}>
+                        <Placeholder isLoading={true} />
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Price */}
+            <h3 id="price" className="heading-with-margin">Price</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+            <div className={styles.col} data-col-12>
+                <div className={`${styles.row} ${styles.example__options_switcher}`}>
+                <div className={styles.col} data-col-3>
+                    <label>Choose size</label>
+                    <select value={priceSize} onChange={(e) => setPriceSize(e.target.value as IPriceProps['size'])}>
+                        <option value="tiny">tiny</option>
+                        <option value="small">small</option>
+                        <option value="normal">normal</option>
+                    </select>
+                </div>
+                <div className={styles.col} data-col-3>
+                    <label>Choose variant</label>
+                    <select value={priceVariant} onChange={(e) => setPriceVariant(e.target.value as IPriceProps['variant'])}>
+                        <option value="sale">sale</option>
+                        <option value="standard">standard</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+
+            <div className={styles.col} data-col-12>
+                <div className={styles.row}>
+                <div className={styles.col} data-col-6>
+                    <h4 className={`${styles['heading-with-margin']} heading-with-margin`}>with regular price only, variant: {priceVariant} size: {priceSize}</h4>
+                    <div>
+                    <Price
+                        price={{
+                            low: { amount: 10, formatted: '$10.00' },
+                            regular_low: { amount: 10, formatted: '$10.00' },
+                            regular_high: { amount: 10, formatted: '$10.00' },
+                            currency: 'USD',
+                        }}
+                        variant={priceVariant}
+                        size={priceSize}
+                    />
+                    </div>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={`${styles['heading-with-margin']} heading-with-margin`}>with regular/sale prices, variant: {priceVariant} size: {priceSize}</h4>
+                    <div>
+                    <Price
+                        price={{
+                            low: { amount: 10, formatted: '$10.00' },
+                            regular_low: { amount: 15, formatted: '$15.00' },
+                            regular_high: { amount: 15, formatted: '$15.00' },
+                            currency: 'USD',
+                        }}
+                        onSale={true}
+                        variant={priceVariant}
+                        size={priceSize}
+                    />
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {/* Progress */}
+            <h3 id="progress" className={`${styles['heading-with-margin']} heading-with-margin`}>Progress</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+                <div className={styles.col} data-col-12>
+                    <div className={`${styles.row} ${styles.example__options_switcher}`}>
+                        <div className={styles.col} data-col-3>
+                            <label>Choose size</label>
+                            <select
+                                aria-label="Choose size"
+                                value={progressSize}
+                                onChange={(e) => setProgressSize(e.target.value as IProgressProps['size'])}
+                            >
+                                <option value="small">small</option>
+                                <option value="medium">medium</option>
+                                <option value="large">large</option>
+                                <option value="extra-large">extra large</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <div style={{ display: 'flex', flexFlow: 'column', gap: '16px' }}>
+                        <Progress percentage={80} size={progressSize} />
+                        <Progress percentage={50} size={progressSize} />
+                        <Progress percentage={30} size={progressSize} />
+                        <Progress percentage={2} size={progressSize} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Rating */}
+            <h3 id="rating" className={`${styles['heading-with-margin']} heading-with-margin`}>Rating</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+                <div className="col" col-6>
+                    <div style={{ display: 'flex', flexFlow: 'column', gap: '16px' }}>
+                        <Rating average={5} />
+                        <Rating average={4} />
+                        <Rating average={3.5} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Row */}
+            <h3 id="row" className={`${styles['heading-with-margin']} heading-with-margin`}>Row</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+                <div className={styles.col} data-col-12>
+                    <div className={`${styles.row} ${styles.example__options_switcher}`}>
+                        <div className={styles.col} data-col-3>
+                            <CheckboxSingle
+                                label="Disabled"
+                                value={rowDisabled}
+                                onChange={() => setRowDisabled(!rowDisabled)}
+                            />
+
+                            <CheckboxSingle
+                                label="Selected"
+                                value={rowSelected}
+                                onChange={() => setRowSelected(!rowSelected)}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.col} data-col-12>
+                    <div className={styles.row}>
+                        <div className={styles.col} data-col-6>
+                        <h4 className={`${styles['heading-with-margin']} heading-with-margin`}>
+                            with leading icons {rowDisabled && 'disabled'}{rowSelected && ', selected'}
+                        </h4>
+                        <Row disabled={rowDisabled} selected={rowSelected}
+                            leading={<IconInput name="bolt" />}
+                            title={<h4>Title</h4>}
+                            text={<p>Text goes here</p>}
+                            trailing={<IconInput name="info" />}
+                        />
+                        </div>
+                        <div className={styles.col} col-6>
+                            <h4 className={`${styles['heading-with-margin']} heading-with-margin`}>
+                                with leading checkbox and trailing button {rowDisabled && 'disabled'}{rowSelected && ', selected'}
+                            </h4>
+                            <Row
+                                disabled={rowDisabled}
+                                selected={rowSelected || rowSelected}
+                                onClick={() => setRowSelected(!rowSelected)}
+
+                                leading={<CheckboxSingle
+                                    label="Selected"
+                                    value={rowSelected}
+                                    hideLabel={true}
+                                    disabled={rowDisabled}
+                                    onChange={() => setRowSelected(!rowSelected)}
+                                />}
+                                title={<h4>Title</h4>}
+                                text={<p>Text goes here</p>}
+                                trailing={<Button
+                                    variant="secondary"
+                                    style="fill"
+                                    size="small"
+                                    label="Button"
+                                    disabled={rowDisabled}
+                                />}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 

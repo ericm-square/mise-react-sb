@@ -7,7 +7,7 @@ const StarEmptyIcon = <Icon name="star_rate_empty" />;
 
 export interface IRatingProps {
   average: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function Rating(props: IRatingProps) {

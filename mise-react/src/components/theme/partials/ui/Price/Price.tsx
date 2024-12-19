@@ -1,4 +1,4 @@
-import Icon from '../Icon/Icon';
+import IconInput from '../../macros/IconInput/IconInput';
 import styles from './Price.module.css';
 
 // TODO: Implement the format_price function here
@@ -20,10 +20,10 @@ export interface IPriceProps {
     };
     currency: string;
   };
-  onSale: boolean;
+  onSale?: boolean;
   unitSuffix?: string;
-  size?: 'small' | 'medium' | 'large' | 'extra-large';
-  variant?: 'default' | 'sale';
+  size?: 'tiny' | 'small' | 'normal';
+  variant?: 'standard' | 'sale';
   color?: string;
   weight?: 'light' | 'heavy';
   italic?: boolean;
@@ -74,10 +74,10 @@ export default function Price(props: IPriceProps) {
         style={{ color }}
       >
         {onSale && variant === 'sale' && (
-          <Icon name="star"
-            // color={color || 'var(--theme-success-text)'}
-            // height={`var(--ui-price-font-size-${size})`}
-            // width={`var(--ui-price-font-size-${size})`}
+          <IconInput name="sell"
+            height={`var(--ui-price-font-size-${size})`}
+            width={`var(--ui-price-font-size-${size})`}
+            color={color ? color : 'var(--theme-success-text)'}
           />
         )}
         {finalPrice.formatted}{isPriceRange && '+'}{unitSuffix && ` / ${unitSuffix}`}
