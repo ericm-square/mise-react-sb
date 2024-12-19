@@ -5,7 +5,7 @@ export interface IPillProps {
   type?: 'info' | 'success' | 'warning' | 'critical' | 'emphasis';
   size?: 'small' | 'normal';
   variant?: 'text' | 'outline' | 'fill';
-  shape?: 'squared' | 'rounded';
+  shape?: 'squared' | 'rounded' | 'pill';
   uppercase?: boolean;
   interactive?: boolean;
   shouldAnnounce?: boolean;

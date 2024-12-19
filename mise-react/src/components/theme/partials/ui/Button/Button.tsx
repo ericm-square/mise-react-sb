@@ -88,10 +88,10 @@ export default function Button(props: IButtonProps) {
       <a
         href={link}
         className={`${styles['ui-button']} ${buttonClasses}`}
-        data-contrast={contrast}
-        data-fullwidth={fullWidth}
-        data-opaque={opaque}
-        data-disabled={disabled}
+        data-contrast={contrast ? 'true' : undefined}
+        data-fullwidth={fullWidth ? 'true' : undefined}
+        data-opaque={opaque ? 'true' : undefined}
+        data-disabled={disabled ? 'true' : undefined}
       >
         {buttonContent}
       </a>
@@ -106,11 +106,11 @@ export default function Button(props: IButtonProps) {
       data-t-style={style}
       data-t-size={size}
       data-t-align={align}
-      data-fullwidth={fullWidth}
-      data-opaque={opaque}
+      data-fullwidth={fullWidth ? 'true' : undefined}
+      data-opaque={opaque ? 'true' : undefined}
       data-destructive={destructive ? 'true' : undefined}
-      disabled={disabled}
-      data-contrast={contrast}
+      disabled={disabled ? true : undefined}
+      data-contrast={contrast ? 'true' : undefined}
       // data-disablehoverstyles={disableHoverStyles}
       // data-isdrowdown={isDropdown}
       // data-disabledropdowntoggle={disableDropdownToggle}

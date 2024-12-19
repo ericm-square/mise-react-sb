@@ -10,6 +10,7 @@ import CheckboxSingle from "@/components/theme/partials/form/CheckboxSingle/Chec
 import Button, { IButtonProps } from "@/components/theme/partials/ui/Button/Button";
 import Notice from "@/components/theme/partials/ui/Notice/Notice";
 import Menu, { IMenuProps } from "@/components/theme/partials/ui/Menu/Menu";
+import Card from "@/components/theme/partials/ui/Card/Card";
 
 export default function PlaygroundPage() {
 
@@ -30,8 +31,8 @@ export default function PlaygroundPage() {
     // Pill...
     const pillTypes: IPillProps['type'][] = ['info', 'warning', 'success', 'critical', 'emphasis'];
     const [pillVariant, setPillVariant] = useState<IPillProps['variant']>('fill');
-    const [pillSize, setPillSize] = useState<IPillProps['size']>('small');
-    const [pillShape, setPillShape] = useState<IPillProps['shape']>('rounded');
+    const [pillSize, setPillSize] = useState<IPillProps['size']>('normal');
+    const [pillShape, setPillShape] = useState<IPillProps['shape']>('pill');
     const [pillUppercase, setPillUppercase] = useState(true);
     const [pillInteractive, setPillInteractive] = useState(false);
 
@@ -643,7 +644,7 @@ export default function PlaygroundPage() {
                     </div>
                     <div
                         className={styles['example__section-divider']}
-                        style={{ backgroundImage: 'url(/images/placeholder.jpeg)', backgroundSize: 'cover', padding: '16px' }}
+                        style={{ backgroundImage: 'url(/images/placeholder.jpeg)', backgroundColor: 'black', backgroundSize: 'cover', padding: '16px' }}
                     >
                         <Button label="Primary fill" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
                         <Button label="Primary outline" style="outline" size={buttonSize} disabled={buttonDisabled} destructive={buttonDestructive} opaque={buttonOpaque} />
@@ -688,10 +689,46 @@ export default function PlaygroundPage() {
             </div>
 
 
-
             {/* TODO: Carousel */}
 
+
             {/* TODO: Card */}
+            <h3 id="card" className={`${styles["heading-with-margin"]} heading-with-margin`}>Card</h3>
+            <div className={`${styles.row} ${styles['row--divider']} ${styles.example__row}`}>
+                <div className={`${styles.col}`} data-col-6>
+                    <h4 className={styles['heading-with-margin']}>with content variant</h4>
+                    <Card>
+                        <div>Content here</div>
+                    </Card>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles['heading-with-margin']}>with action variant</h4>
+                    <Card variant="action">
+                        <div>
+                            <h4>Title</h4>
+                            <p>Text goes here</p>
+                        </div>
+                    </Card>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles['heading-with-margin']}>with selected</h4>
+                    <Card variant="action" selected>
+                        <div>
+                            <h4>Title</h4>
+                            <p>Text goes here</p>
+                        </div>
+                    </Card>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles['heading-with-margin']}>with error</h4>
+                    <Card variant="action" invalid={true}>
+                        <div>
+                            <h4>Title</h4>
+                            <p>Text goes here</p>
+                        </div>
+                    </Card>
+                </div>
+            </div>
 
             {/* TODO: Dialog */}
 

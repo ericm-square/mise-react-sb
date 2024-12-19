@@ -26,7 +26,6 @@ export default function Card(props: ICardProps) {
 
   return (
     <div
-      role={isActionCard ? 'button' : undefined}
       tabIndex={isActionCard ? 0 : undefined}
       data-t-variant={variant}
       data-selected={isActionCard && isSelected ? isSelected : undefined}
