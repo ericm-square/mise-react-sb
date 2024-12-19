@@ -11,6 +11,7 @@ import Button, { IButtonProps } from "@/components/theme/partials/ui/Button/Butt
 import Notice from "@/components/theme/partials/ui/Notice/Notice";
 import Menu, { IMenuProps } from "@/components/theme/partials/ui/Menu/Menu";
 import Card from "@/components/theme/partials/ui/Card/Card";
+import GoogleMap from "@/components/theme/partials/ui/GoogleMap/GoogleMap";
 
 export default function PlaygroundPage() {
 
@@ -50,6 +51,42 @@ export default function PlaygroundPage() {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [buttonDestructive, setButtonDestructive] = useState(false);
     const [buttonOpaque, setButtonOpaque] = useState(false);
+
+    // Google Map...
+    const pincolor = '006aff';  // TODO: Should be brand color
+    const pincontrastcolor = pincolor || 'ffffff';  // TODO: Should be brand color contrast
+    const singlePinMapConfig = {
+        height: '230px',
+        lat: '37.09024',
+        long: '-95.71289',
+        pincolor,
+        pincontrastcolor,
+    };
+    const multiplePinsMapConfig = {
+        height: '230px',
+        lat: 0,
+        long: 0,
+        activeMarker: null,
+        control: 3,
+        scalecontrol: 1,
+        markers: [{
+            id: 'location_1',
+            display_name: 'Square SF',
+            address: '1455 Market Street Unit 600, San Francisco, CA 94103',
+            phone: '855-700-6000',
+            lat: '37.09024',
+            long: '-95.71289',
+        }, {
+            id: 'location_2',
+            display_name: 'Square NY',
+            address: '375 W Broadway, New York, NJ 10012',
+            phone: '646-217-0502',
+            lat: '40.7234785',
+            long: '-74.0208671',
+        }],
+        pincolor,
+        pincontrastcolor,
+    };
 
     // Loader...
     const [loaderSize, setLoaderSize] = useState<ILoaderProps['size']>('small');
@@ -733,6 +770,21 @@ export default function PlaygroundPage() {
             {/* TODO: Dialog */}
 
             {/* TODO: Google Map */}
+            <h3 id="google-map" className={`${styles["heading-with-margin"]} heading-with-margin`}>Google map</h3>
+            <div className={styles["row row--divider example__row"]}>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles["heading-with-margin"]}>with single marker</h4>
+                    <div>
+                        <GoogleMap mapConfig={singlePinMapConfig} />
+                    </div>
+                </div>
+                <div className={styles.col} data-col-6>
+                    <h4 className={styles["heading-with-margin"]}>with multiple markers</h4>
+                    <div>
+                        <GoogleMap mapConfig={multiplePinsMapConfig} />
+                    </div>
+                </div>
+            </div>
 
 
             {/* Icons */}
